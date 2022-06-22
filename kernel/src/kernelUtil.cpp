@@ -5,6 +5,7 @@
 #include "IO.h"
 #include "acpi.h"
 #include "pci.h"
+#include "memory/heap.h"
 KernelInfo kernelInfo; 
 
 void PrepareMemory(BootInfo* bootInfo){
@@ -88,7 +89,11 @@ KernelInfo InitializeKernel(BootInfo* bootInfo){
 
     GlobalRenderer->ClearColour = 0x000c7aac;
     GlobalRenderer->Clear();
+    GlobalRenderer->Print("WalterOS is starting up..."); GlobalRenderer->Next();
     GlobalRenderer->Print("*   Preparing Interrupts"); GlobalRenderer->Next();
+
+
+    InitializeHeap((void*)0x0000100000000000, 0x10);
 
     PrepareInterrupts();
 
