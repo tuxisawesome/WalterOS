@@ -12,7 +12,7 @@ namespace ACPI{
         uint64_t XSDTAddress;
         uint8_t ExtendedChecksum;
         uint8_t Reserved[3];
-    }__attribute__((packed));
+    } __attribute__((packed));
 
     struct SDTHeader{
         unsigned char Signature[4];
@@ -31,7 +31,6 @@ namespace ACPI{
         uint64_t Reserved;
     }__attribute__((packed));
 
-    void* FindTable(SDTHeader* sdtHeader, char* signature);
     struct DeviceConfig{
         uint64_t BaseAddress;
         uint16_t PCISegGroup;
@@ -39,4 +38,7 @@ namespace ACPI{
         uint8_t EndBus;
         uint32_t Reserved;
     }__attribute__((packed));
+
+
+    void* FindTable(SDTHeader* sdtHeader, char* signature);
 }

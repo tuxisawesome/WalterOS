@@ -114,15 +114,8 @@ void BasicRenderer::ClearChar(){
 }
 
 void BasicRenderer::Next(){
-    if (CursorPosition.Y + 16 > TargetFramebuffer->Height) {
-        CursorPosition.Y = 0;
-        CursorPosition.X = 0;
-    } else {
-
-    
-        CursorPosition.X = 0;
-        CursorPosition.Y += 16;
-    }
+    CursorPosition.X = 0;
+    CursorPosition.Y += 16;
 }
 
 void BasicRenderer::Print(const char* str)
@@ -130,10 +123,6 @@ void BasicRenderer::Print(const char* str)
     
     char* chr = (char*)str;
     while(*chr != 0){
-        if (CursorPosition.Y + 16 > TargetFramebuffer->Height) {
-            CursorPosition.Y = 0;
-            CursorPosition.X = 0;
-        }
         PutChar(*chr, CursorPosition.X, CursorPosition.Y);
         CursorPosition.X+=8;
         if(CursorPosition.X + 8 > TargetFramebuffer->Width)
@@ -162,10 +151,6 @@ void BasicRenderer::PutChar(char chr, unsigned int xOff, unsigned int yOff)
 
 void BasicRenderer::PutChar(char chr)
 {
-    if (CursorPosition.Y > TargetFramebuffer->Height) {
-        CursorPosition.Y = 0;
-        CursorPosition.X = 0;
-    }
     PutChar(chr, CursorPosition.X, CursorPosition.Y);
     CursorPosition.X += 8;
     if (CursorPosition.X + 8 > TargetFramebuffer->Width){

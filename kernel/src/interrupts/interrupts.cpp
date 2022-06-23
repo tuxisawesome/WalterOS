@@ -19,6 +19,8 @@ __attribute__((interrupt)) void GPFault_Handler(interrupt_frame* frame){
     while(true);
 }
 
+
+
 __attribute__((interrupt)) void KeyboardInt_Handler(interrupt_frame* frame){
     uint8_t scancode = inb(0x60);
 
@@ -36,12 +38,9 @@ __attribute__((interrupt)) void MouseInt_Handler(interrupt_frame* frame){
     PIC_EndSlave();
 }
 
-
 __attribute__((interrupt)) void PITInt_Handler(interrupt_frame* frame){
     PIT::Tick();
     PIC_EndMaster();
-    
-
 }
 
 void PIC_EndMaster(){

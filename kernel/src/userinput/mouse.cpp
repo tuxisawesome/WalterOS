@@ -59,16 +59,17 @@ void HandlePS2Mouse(uint8_t data){
 
     ProcessMousePacket();
     static bool skip = true;
-    if (skip) {skip = false; return; }
+    if (skip) { skip = false; return; }
+
     switch(MouseCycle){
         case 0:
-            
+           
             if ((data & 0b00001000) == 0) break;
             MousePacket[0] = data;
             MouseCycle++;
             break;
         case 1:
-            
+           
             MousePacket[1] = data;
             MouseCycle++;
             break;
@@ -146,7 +147,7 @@ void ProcessMousePacket(){
             
         }
         if (MousePacket[0] & PS2Rightbutton){
-            
+
         }
 
         MousePacketReady = false;

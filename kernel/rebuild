@@ -1,9 +1,0 @@
-#!/bin/bash
-echo "WalterOS Builder"
-cd ../gnu-efi
-make bootloader
-cd ../kernel
-rm -rf lib
-make kernel
-make buildimg
-make run

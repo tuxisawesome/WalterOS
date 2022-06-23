@@ -3,9 +3,8 @@
 #include "interrupts/IDT.h"
 #include "interrupts/interrupts.h"
 #include "IO.h"
-#include "acpi.h"
-#include "pci.h"
 #include "memory/heap.h"
+
 KernelInfo kernelInfo; 
 
 void PrepareMemory(BootInfo* bootInfo){
@@ -67,7 +66,7 @@ void PrepareInterrupts(){
 
 void PrepareACPI(BootInfo* bootInfo){
     ACPI::SDTHeader* xsdt = (ACPI::SDTHeader*)(bootInfo->rsdp->XSDTAddress);
-
+    
     ACPI::MCFGHeader* mcfg = (ACPI::MCFGHeader*)ACPI::FindTable(xsdt, (char*)"MCFG");
 
     PCI::EnumeratePCI(mcfg);
@@ -77,6 +76,7 @@ BasicRenderer r = BasicRenderer(NULL, NULL);
 KernelInfo InitializeKernel(BootInfo* bootInfo){
     r = BasicRenderer(bootInfo->framebuffer, bootInfo->psf1_Font);
     GlobalRenderer = &r;
+
     GDTDescriptor gdtDescriptor;
     gdtDescriptor.Size = sizeof(GDT) - 1;
     gdtDescriptor.Offset = (uint64_t)&DefaultGDT;
@@ -86,30 +86,18 @@ KernelInfo InitializeKernel(BootInfo* bootInfo){
 
     memset(bootInfo->framebuffer->BaseAddress, 0, bootInfo->framebuffer->BufferSize);
 
-    GlobalRenderer->ClearColour = 0x000c7aac;
-    GlobalRenderer->Clear();
-    GlobalRenderer->Print("WalterOS is starting up..."); GlobalRenderer->Next();
-    GlobalRenderer->Print("*   Preparing Interrupts"); GlobalRenderer->Next();
-
-
     InitializeHeap((void*)0x0000100000000000, 0x10);
 
     PrepareInterrupts();
 
-    GlobalRenderer->Print("*   Configuring Moused"); GlobalRenderer->Next();
-
     InitPS2Mouse();
 
-    GlobalRenderer->Print("*   Preparing ACPI"); GlobalRenderer->Next();
-
     PrepareACPI(bootInfo);
-
-    GlobalRenderer->Print("*   Setting timers"); GlobalRenderer->Next();
 
     outb(PIC1_DATA, 0b11111000);
     outb(PIC2_DATA, 0b11101111);
 
     asm ("sti");
-    GlobalRenderer->Print("Entering Stage2..."); GlobalRenderer->Next(); GlobalRenderer->Next(); GlobalRenderer->Next();
+
     return kernelInfo;
 }

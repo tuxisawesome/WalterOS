@@ -9,10 +9,7 @@ namespace PIT {
     void Sleep(uint64_t milliseconds);
 
     void SetDivisor(uint16_t divisor);
-
     uint64_t GetFrequency();
     void SetFrequency(uint64_t frequency);
-    
-
-    void Tick(); // Called once every tick
+    void Tick();
 }
