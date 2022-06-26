@@ -1,6 +1,6 @@
 #!/bin/bash
 
 clear
-echo WalterOS Setup is loading...l
+echo WalterOS Setup is loading...
 pip install alive-progress
 python3 main.py
