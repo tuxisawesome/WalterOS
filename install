@@ -1,4 +1,6 @@
 #!/bin/bash
 
-echo hi
-poweroff
+clear
+echo WalterOS Setup is loading...l
+pip install alive-progress
+python3 main.py
