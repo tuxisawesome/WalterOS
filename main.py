@@ -1,3 +1,3 @@
 import os
-import alive-progress
-alive-progress.showtime()
+import alive_progress
+alive_progress.showtime()
