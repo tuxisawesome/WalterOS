@@ -84,7 +84,7 @@ for FILE in os.listdir(folderA):
 
          75 / 150 Mb  ||||||||||         |  50%
 '''
-def drivepart:
+def drivepart():
     print("I will give you a list of drive names. Pick the drive that is yours.")
     print("")
     os.system("sudo fdisk -l")
