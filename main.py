@@ -60,7 +60,7 @@ def CPprogress(SOURCE, DESTINATION):
     print " "
     print (BOLD + UNDERLINE + "FROM:" + CEND + "   "), SOURCE
     print (BOLD + UNDERLINE + "TO:" + CEND + "     "), dst_file
-    print " "
+    print(" ")
     threading.Thread(name='progresso', target=getPERCECENTprogress, args=(SOURCE, dst_file)).start()
     shutil.copy2(SOURCE, DESTINATION)
     time.sleep(.02)
@@ -68,8 +68,8 @@ def CPprogress(SOURCE, DESTINATION):
     #STYLE#sys.stdout.write(("         {:d} / {:d} Mb   ".format((int(os.path.getsize(dst_file)/1000000)), (int(os.path.getsize(SOURCE)/1000000)))) +  (BOLD + finalCOLOR + "{:20s}".format('|'*20) + CEND) + ("   {:d}% ".format(100))) # BG progress 100%
     sys.stdout.write(("         {:d} / {:d} Mb   ".format((int(os.path.getsize(dst_file)/1000000)), (int(os.path.getsize(SOURCE)/1000000)))) +  (BOLD + BlueCOLOR + "▐" + "{:s}{:s}".format(('█'*20), endBLOCK) + CEND) + ("   {:d}% ".format(100))) #STYLE# # BG progress 100%# closer to GUI but less compatible (no block bar with xterm) # requires utf8 coding header
     sys.stdout.flush()
-    print " "
-    print " "
+    print(" ")
+    print(" ")
 
 '''
 #Ex. Copy all files from root of the source dir to destination dir
