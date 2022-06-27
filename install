@@ -1,6 +1,5 @@
 #!/bin/bash
 
 clear
-echo WalterOS Setup is loading...
-pip install alive-progress
+echo WalterOS Setup is bootstrapping dependencies...
 python3 main.py
