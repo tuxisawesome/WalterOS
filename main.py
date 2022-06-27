@@ -57,7 +57,7 @@ def CPprogress(SOURCE, DESTINATION):
     if os.path.isdir(DESTINATION):
         dst_file = os.path.join(DESTINATION, os.path.basename(SOURCE))
     else: dst_file = DESTINATION
-    print " "
+    print(" ")
     print (BOLD + UNDERLINE + "FROM:" + CEND + "   "), SOURCE
     print (BOLD + UNDERLINE + "TO:" + CEND + "     "), dst_file
     print(" ")
