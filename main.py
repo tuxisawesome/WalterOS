@@ -28,6 +28,11 @@ import sys
 import threading
 import time
 os.system("clear")
+
+def error(errortype):
+    print("Error!")
+    print(errortype)
+    sys.exit(1)
 ######## COLORS ######
 progressCOLOR = '\033[38;5;33;48;5;236m' #\033[38;5;33;48;5;236m# copy inside '' for colored progressbar| orange:#\033[38;5;208;48;5;235m
 finalCOLOR =  '\033[38;5;33;48;5;33m' #\033[38;5;33;48;5;33m# copy inside '' for colored progressbar| orange:#\033[38;5;208;48;5;208m
@@ -85,20 +90,23 @@ for FILE in os.listdir(folderA):
          75 / 150 Mb  ||||||||||         |  50%
 '''
 def drivepart():
-    print("I will give you a list of drive names. Pick the drive that is yours.")
-    print("")
-    os.system("sudo fdisk -l")
-    print("")
-    drive = input("Enter drive name: ")
-    print(f"Are you sure with drive {drive}?")
-    print("Y or N (Case does not matter)")
-    choice = input(": ")
-    if (choice == "n" or choice == "N"):
-        drivepart()
-    os.system(f"bash 1-partdisk.sh {drive}")
-    os.system(f"sudo mkfs.fat -F32 {drive}1")
-    os.system("mkdir mount")
-    os.system(f"sudo mount {drive}1 mount/")
+    try:
+        print("I will give you a list of drive names. Pick the drive that is yours.")
+        print("")
+        os.system("sudo fdisk -l")
+        print("")
+        drive = input("Enter drive name: ")
+        print(f"Are you sure with drive {drive}?")
+        print("Y or N (Case does not matter)")
+        choice = input(": ")
+        if (choice == "n" or choice == "N"):
+            drivepart()
+        os.system(f"bash 1-partdisk.sh {drive}")
+        os.system(f"sudo mkfs.fat -F32 {drive}1")
+        os.system("mkdir mount")
+        os.system(f"sudo mount {drive}1 mount/")
+    except:
+        error("Partitioning failed.")
 
 
 folderA = 'kernel/bin' # SOURCE
@@ -111,19 +119,21 @@ drivepart()
     
     
 folderB = 'mount' # DESTINATION
-for FILE in os.listdir(folderA):
-    if not os.path.isdir(os.path.join(folderA, FILE)):
-        if os.path.exists(os.path.join(folderB, FILE)): continue # as we are using shutil.copy2() that overwrites destination, this skips existing files
-        CPprogress(os.path.join(folderA, FILE), folderB) # use the command as if it was shutil.copy2() but with progress
+try:
+    for FILE in os.listdir(folderA):
+        if not os.path.isdir(os.path.join(folderA, FILE)):
+            if os.path.exists(os.path.join(folderB, FILE)): continue # as we are using shutil.copy2() that overwrites destination, this skips existing files
+            CPprogress(os.path.join(folderA, FILE), folderB) # use the command as if it was shutil.copy2() but with progress
 
-os.system("mkdir -p mount/EFI/boot/")
-folderB = 'mount/EFI/boot'
-folderA = 'gnu-efi/x86_64/bootloader'
-for FILE in os.listdir(folderA):
-    if not os.path.isdir(os.path.join(folderA, FILE)):
-        if os.path.exists(os.path.join(folderB, FILE)): continue # as we are using shutil.copy2() that overwrites destination, this skips existing files
-        CPprogress(os.path.join(folderA, FILE), folderB) # use the command as if it was shutil.copy2() but with progress
-
+    os.system("mkdir -p mount/EFI/boot/")
+    folderB = 'mount/EFI/boot'
+    folderA = 'gnu-efi/x86_64/bootloader'
+    for FILE in os.listdir(folderA):
+        if not os.path.isdir(os.path.join(folderA, FILE)):
+            if os.path.exists(os.path.join(folderB, FILE)): continue # as we are using shutil.copy2() that overwrites destination, this skips existing files
+            CPprogress(os.path.join(folderA, FILE), folderB) # use the command as if it was shutil.copy2() but with progress
+except:
+    error("File copying failed")
 print("")
 print("")
 print("Completed!")
