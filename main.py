@@ -90,7 +90,7 @@ def drivepart():
     os.system("sudo fdisk -l")
     print("")
     drive = input("Enter drive name: ")
-    print("Are you sure with drive {drive}?")
+    print(f"Are you sure with drive {drive}?")
     print("Y or N (Case does not matter)")
     choice = input(": ")
     if (choice == "n" or choice == "N"):
