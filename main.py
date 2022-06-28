@@ -90,20 +90,20 @@ def drivepart():
     os.system("sudo fdisk -l")
     print("")
     drive = input("Enter drive name: ")
-    print("Are you sure with drive " + drive + "?")
+    print("Are you sure with drive {drive}?")
     print("Y or N (Case does not matter)")
     choice = input(": ")
     if (choice == "n" or choice == "N"):
         drivepart()
-    os.system("bash 1-partdisk.sh " + drive)
-    os.system("sudo mkfs.fat -F32 " + drive + "1")
+    os.system(f"bash 1-partdisk.sh {drive}")
+    os.system(f"sudo mkfs.fat -F32 {drive}1")
     os.system("mkdir mount")
-    os.system("sudo mount " + drive + "1" + " mount")
+    os.system(f"sudo mount {drive}1 mount")
 
 
 folderA = 'kernel/bin' # SOURCE
 print("WalterOS Installer 1.0")
-print("Running on WalterOS Bootstraper " + os.system("uname -r"))
+print(f'Running on WalterOS Bootstraper {os.system("uname -r")}')
 print("")
 drivepart()
 
