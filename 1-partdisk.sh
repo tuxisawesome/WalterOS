@@ -7,6 +7,6 @@ p      # primary partition
        # default - last sector
 t      # change partition type
 1      # partition number
-b      # Linux filesystem
+0b     # Phat file system
 w      # write partition table and exit
 FDISK_CMDS
