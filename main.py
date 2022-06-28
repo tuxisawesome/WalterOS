@@ -98,7 +98,7 @@ def drivepart():
     os.system(f"bash 1-partdisk.sh {drive}")
     os.system(f"sudo mkfs.fat -F32 {drive}1")
     os.system("mkdir mount")
-    os.system(f"sudo mount {drive}1 mount")
+    os.system(f"sudo mount {drive}1 mount/")
 
 
 folderA = 'kernel/bin' # SOURCE
