@@ -2,5 +2,5 @@
 
 clear
 echo WalterOS Setup is bootstrapping dependencies...
-python3 main.py
+sudo python3 main.py
 sleep 10000
