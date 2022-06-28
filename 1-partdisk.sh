@@ -1,4 +1,4 @@
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << FDISK_CMDS  | sudo fdisk $1
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\2/' << FDISK_CMDS  | sudo fdisk $1
 o      # create new GPT partition
 n      # add new partition
 p      # primary partition
