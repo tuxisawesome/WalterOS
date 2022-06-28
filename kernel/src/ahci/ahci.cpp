@@ -178,7 +178,6 @@ namespace AHCI{
         
         for (int i = 0; i < portCount; i++){
             Port* port = ports[i];
-
             port->Configure();
 
             port->buffer = (uint8_t*)GlobalAllocator.RequestPage();

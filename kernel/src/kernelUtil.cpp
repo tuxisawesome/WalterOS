@@ -85,14 +85,24 @@ KernelInfo InitializeKernel(BootInfo* bootInfo){
     PrepareMemory(bootInfo);
 
     memset(bootInfo->framebuffer->BaseAddress, 0, bootInfo->framebuffer->BufferSize);
-
+    GlobalRenderer->ClearColour = 0x00117a65;
+    GlobalRenderer->Clear();
+    GlobalRenderer->Print("WalterOS is starting!"); GlobalRenderer->Next();
     InitializeHeap((void*)0x0000100000000000, 0x10);
+
+    GlobalRenderer->Print("*   Initialized heap    "); GlobalRenderer->Next();
 
     PrepareInterrupts();
 
+    GlobalRenderer->Print("*   Prepared Interrupts "); GlobalRenderer->Next();
+
     InitPS2Mouse();
 
+    GlobalRenderer->Print("*   Initialized mouse "); GlobalRenderer->Next();
+
     PrepareACPI(bootInfo);
+
+    GlobalRenderer->Print("*   Loaded ACPI "); GlobalRenderer->Next();
 
     outb(PIC1_DATA, 0b11111000);
     outb(PIC2_DATA, 0b11101111);
