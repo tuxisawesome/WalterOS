@@ -6,7 +6,6 @@ p
 
 
 t
-1
 0b
 w
 FDISK_CMDS
