@@ -21,13 +21,13 @@ NOTE: If you want to copy lots of small files, the copy process for file is so f
       In that case, I use an overall progress that shows only one progress bar to the complete job.   nzX
 '''
 
-os.system("clear")
+
 import os
 import shutil
 import sys
 import threading
 import time
-
+os.system("clear")
 ######## COLORS ######
 progressCOLOR = '\033[38;5;33;48;5;236m' #\033[38;5;33;48;5;236m# copy inside '' for colored progressbar| orange:#\033[38;5;208;48;5;235m
 finalCOLOR =  '\033[38;5;33;48;5;33m' #\033[38;5;33;48;5;33m# copy inside '' for colored progressbar| orange:#\033[38;5;208;48;5;208m
