@@ -125,7 +125,7 @@ try:
             if os.path.exists(os.path.join(folderB, FILE)): continue # as we are using shutil.copy2() that overwrites destination, this skips existing files
             CPprogress(os.path.join(folderA, FILE), folderB) # use the command as if it was shutil.copy2() but with progress
 
-    os.system("mkdir -p mount/EFI/boot/")
+    os.system("sudo mkdir -p mount/EFI/boot/")
     folderB = 'mount/EFI/boot'
     folderA = 'gnu-efi/x86_64/bootloader'
     for FILE in os.listdir(folderA):
@@ -133,6 +133,7 @@ try:
             if os.path.exists(os.path.join(folderB, FILE)): continue # as we are using shutil.copy2() that overwrites destination, this skips existing files
             CPprogress(os.path.join(folderA, FILE), folderB) # use the command as if it was shutil.copy2() but with progress
 except:
+    os.system(f"sudo umount {drive}")
     error("File copying failed")
 print("")
 print("")
